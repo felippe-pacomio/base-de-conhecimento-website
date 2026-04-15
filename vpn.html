@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como realizar a configuração da VPN</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444); box-shadow: 0 8px 24px rgba(220,38,38,0.3);">🔒</div>
+    <h1>Como realizar a <span>configuração da VPN</span></h1>
+    <p>Guia interno para agentes do Service Desk — configuração de certificados e OpenVPN via OPNSense.</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-box">
+      <p>Este guia detalha os passos para <strong>configurar a VPN</strong> em uma máquina da empresa, incluindo o download de certificados via <strong>OPNSense</strong>, renomeação dos arquivos, e configuração do <strong>OpenVPN</strong>. Também cobre o procedimento para <strong>criar um novo certificado</strong> caso ele ainda não exista.</p>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-container">
+
+    <!-- ========== PARTE 1: ACESSO AO OPNSENSE ========== -->
+
+    <!-- STEP 1 -->
+    <div class="step" style="border-radius: 0 0 12px 12px;">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Acessar o painel OPNSense</h3>
+        <p>Com sua <strong>VPN ativada</strong>, abra o navegador e acesse o endereço abaixo. Uma mensagem de <em>"Sua conexão não é privada"</em> será exibida. Clique em <strong>"Avançado"</strong>.</p>
+        <div class="code-block">http://54.232.64.63/</div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/1.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Prosseguir para o site</h3>
+        <p>Clique em <strong>"Continue até 54.232.64.63 (não seguro)"</strong> para acessar o painel.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/2.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Fazer login no OPNSense</h3>
+        <p>Na tela de login do OPNSense, insira suas <strong>credenciais de acesso</strong> e clique em <strong>"Login"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/3.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Navegar até os certificados</h3>
+        <p>No painel do OPNSense, navegue pelo menu: <strong>System → Trust → Certificates</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/4.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 2: DOWNLOAD DOS CERTIFICADOS ========== -->
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Verificar se o certificado já existe</h3>
+        <p>No campo <strong>"Search"</strong>, pesquise pelo nome da máquina para verificar se já existe um certificado. Caso exista, prossiga para o <strong>Passo 6</strong>. Caso <strong>não exista</strong>, vá para o <strong>Passo 18</strong> (criação de certificado).</p>
+        <div class="callout callout-note">
+          <span class="callout-icon">📌</span>
+          <span><strong>EXEMPLO:</strong> Neste tutorial, pesquisamos pela máquina <strong>SYS-N44</strong> como demonstração.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/5.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 6 -->
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h3>Iniciar o download</h3>
+        <p>Na coluna <strong>"Commands"</strong>, clique no ícone de <strong>Download</strong> (nuvem com seta para baixo).</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/6.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 7 -->
+    <div class="step">
+      <div class="step-number">7</div>
+      <div class="step-content">
+        <h3>Baixar o Certificate</h3>
+        <p>No campo <strong>"File Type"</strong>, selecione <strong>"Certificate"</strong> e faça o download.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/7.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/8.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 8 -->
+    <div class="step">
+      <div class="step-number">8</div>
+      <div class="step-content">
+        <h3>Baixar a Private Key</h3>
+        <p>Retorne ao campo anterior, selecione <strong>"Private Key"</strong> e faça o download. Os dois arquivos serão baixados com a extensão <strong>.pem</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/9.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/10.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 3: RENOMEAR OS ARQUIVOS ========== -->
+
+    <!-- STEP 9 -->
+    <div class="step">
+      <div class="step-number">9</div>
+      <div class="step-content">
+        <h3>Renomear a Private Key</h3>
+        <p>Na pasta <strong>Downloads</strong>, localize o arquivo <strong>sys-n[xx]_prv.pem</strong> (onde <strong>xx</strong> é o número do computador). Clique com o botão direito, selecione <strong>"Mostrar mais opções"</strong> e depois <strong>"Renomear"</strong>. Altere o nome para:</p>
+        <div class="code-block">client.key</div>
+        <p>Na tela de confirmação, clique em <strong>"Sim"</strong> para alterar o nome e a extensão.</p>
+        <div class="callout callout-important">
+          <span class="callout-icon">⚠️</span>
+          <span><strong>IMPORTANTE:</strong> Se a extensão do arquivo não estiver aparecendo, ative a opção <strong>"Extensões de nomes de arquivo"</strong> na aba <strong>"Exibir"</strong> do Explorador de Arquivos.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/11.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/12.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/13.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 10 -->
+    <div class="step">
+      <div class="step-number">10</div>
+      <div class="step-content">
+        <h3>Renomear o Certificate</h3>
+        <p>Agora localize o arquivo <strong>sys-n[xx]_crt.pem</strong>. Clique com o botão direito e renomeie para:</p>
+        <div class="code-block">client.crt</div>
+        <p>Clique em <strong>"Sim"</strong> para confirmar a alteração.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/14.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 11 -->
+    <div class="step">
+      <div class="step-number">11</div>
+      <div class="step-content">
+        <h3>Verificar os arquivos renomeados</h3>
+        <p>Os arquivos devem ficar com os nomes <strong>client.key</strong> e <strong>client.crt</strong> conforme a imagem abaixo.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/15.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 4: COPIAR PARA A PASTA CORRETA ========== -->
+
+    <!-- STEP 12 -->
+    <div class="step">
+      <div class="step-number">12</div>
+      <div class="step-content">
+        <h3>Recortar os arquivos</h3>
+        <p>Selecione os dois arquivos (<strong>client.key</strong> e <strong>client.crt</strong>) e clique em <strong>"Recortar"</strong> (Ctrl+X).</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/20.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 13 -->
+    <div class="step">
+      <div class="step-number">13</div>
+      <div class="step-content">
+        <h3>Navegar até a pasta de configuração da VPN</h3>
+        <p>Navegue até o diretório compartilhado: <strong>SysDrive - Infra → Service Desk → 9. VPN → config-auto</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/16.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/17.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/18.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/19.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 14 -->
+    <div class="step">
+      <div class="step-number">14</div>
+      <div class="step-content">
+        <h3>Colar e substituir os arquivos</h3>
+        <p>Clique com o botão direito e selecione <strong>"Colar"</strong>. Clique em <strong>"Sim"</strong> para substituir os arquivos existentes.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/21.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 15 -->
+    <div class="step">
+      <div class="step-number">15</div>
+      <div class="step-content">
+        <h3>Copiar todos os arquivos de configuração</h3>
+        <p>Selecione <strong>todos os arquivos</strong> dentro da pasta <strong>config-auto</strong> e clique em <strong>"Copiar"</strong> (Ctrl+C).</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/22.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 16 -->
+    <div class="step">
+      <div class="step-number">16</div>
+      <div class="step-content">
+        <h3>Colar na pasta do OpenVPN</h3>
+        <p>Navegue até o diretório de configuração do OpenVPN e cole os arquivos:</p>
+        <div class="code-block">C:\Arquivos de Programas\OpenVPN\config-auto</div>
+        <p>Clique com o botão direito em <strong>"Colar"</strong>. Marque <strong>"Fazer isso para todos os itens atuais"</strong> e clique em <strong>"Continuar"</strong>.</p>
+        <div class="callout callout-important">
+          <span class="callout-icon">⚠️</span>
+          <span><strong>IMPORTANTE:</strong> Será necessária permissão de administrador. Libere o acesso com o administrador local <strong>sysevolution-ti</strong>.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/23.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/24.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 17 -->
+    <div class="step">
+      <div class="step-number">17</div>
+      <div class="step-content">
+        <h3>Verificar a pasta e reiniciar o serviço</h3>
+        <p>A pasta deve conter todos os arquivos de configuração conforme a imagem. Em seguida, na <strong>barra de pesquisa do Windows</strong>, digite <strong>"Gerenciador de Tarefas"</strong> e execute-o como administrador.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/25.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/26.png">
+        </div>
+        <p>Vá até a aba <strong>"Serviços"</strong>, encontre o serviço <strong>OpenVPNServiceInteractive</strong> e clique em <strong>"Reiniciar"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/27.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/28.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 5: CASO O CERTIFICADO NÃO EXISTA ========== -->
+
+    <!-- STEP 18 -->
+    <div class="step">
+      <div class="step-number">18</div>
+      <div class="step-content">
+        <h3>Criar um novo certificado (se necessário)</h3>
+        <p>Caso o certificado <strong>não exista</strong> no passo 5, clique no ícone de <strong>"+"</strong> no painel do OPNSense para criar um novo.</p>
+        <div class="callout callout-note">
+          <span class="callout-icon">📌</span>
+          <span><strong>NOTA:</strong> Este passo só é necessário caso a máquina ainda não possua um certificado cadastrado.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/29.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 19 -->
+    <div class="step">
+      <div class="step-number">19</div>
+      <div class="step-content">
+        <h3>Preencher os dados do certificado</h3>
+        <p>Preencha os campos conforme abaixo:</p>
+        <div class="callout callout-tip">
+          <span class="callout-icon">💡</span>
+          <span><strong>Campos a preencher:</strong><br>
+          • <strong>Description:</strong> nome da máquina (ex: SYS-N44)<br>
+          • <strong>Issuer:</strong> selecione <strong>SysEvolution</strong><br>
+          • <strong>Common Name:</strong> digite novamente o nome da máquina</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/30.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/31.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-images/32.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 20 -->
+    <div class="step" style="border-radius: 12px 12px 0 0;">
+      <div class="step-number">20</div>
+      <div class="step-content">
+        <h3>Baixar os certificados e finalizar</h3>
+        <p>Após a criação, faça o <strong>download dos certificados</strong> (Certificate e Private Key) e repita os passos <strong>6 a 17</strong> para concluir a configuração.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-images/33.png">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DONE -->
+  <div class="done-section">
+    <div class="done-icon">✅</div>
+    <h2>Pronto!</h2>
+    <p>A <strong>VPN está configurada</strong>. O OpenVPN deve conectar automaticamente utilizando os certificados instalados.</p>
+  </div>
+
+  <!-- OBSERVATIONS -->
+  <div class="obs-section">
+    <div class="obs-box">
+      <h4>📋 Observações</h4>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Certifique-se de que a <strong>VPN está ativa</strong> antes de acessar o painel OPNSense.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Os arquivos devem ser renomeados <strong>exatamente</strong> para <strong>client.key</strong> e <strong>client.crt</strong> — qualquer variação impedirá o funcionamento.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Caso a extensão dos arquivos não esteja visível, ative a opção <strong>"Extensões de nomes de arquivo"</strong> no Explorador de Arquivos (aba Exibir).</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Após colar os arquivos na pasta do OpenVPN, é <strong>obrigatório reiniciar</strong> o serviço <strong>OpenVPNServiceInteractive</strong> no Gerenciador de Tarefas.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Para criar novos certificados, utilize o ícone <strong>"+"</strong> no painel, preenchendo <strong>Description</strong>, <strong>Issuer</strong> (SysEvolution) e <strong>Common Name</strong> com o nome da máquina.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="img-placeholder">
+      <img src="./images/Logo-SysEvolution-Horizontal.jpg">
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

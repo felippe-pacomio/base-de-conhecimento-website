@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como realizar a configuração da VPN Restrita</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-icon" style="background: linear-gradient(135deg, #7c3aed, #a855f7); box-shadow: 0 8px 24px rgba(124,58,237,0.3);">🔐</div>
+    <h1>Como realizar a configuração da<br><span>VPN Restrita</span></h1>
+    <p>Guia interno para agentes do Service Desk — configuração da VPN com acesso a recursos confidenciais.</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-box">
+      <p>Diferente da VPN padrão, a <strong>VPN Restrita</strong> libera o acesso a <strong>recursos confidenciais</strong> da Sys, sendo destinada a <strong>desenvolvedores</strong> e funções que necessitam de acesso privilegiado à infraestrutura interna. Este guia cobre tanto a <strong>configuração da VPN na máquina do usuário</strong> quanto o <strong>cadastro no Active Directory (AD)</strong>, caso o usuário ainda não esteja registrado.</p>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-container">
+
+    <!-- ========== PARTE 1: CONFIGURAÇÃO DA VPN ========== -->
+
+    <!-- STEP 1 -->
+    <div class="step" style="border-radius: 0 0 12px 12px;">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Acessar a pasta de configuração</h3>
+        <p>No Explorador de Arquivos, navegue até o diretório compartilhado: <strong>SysDrive - Infra → Service Desk</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/1.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Abrir a pasta da VPN</h3>
+        <p>Localize e abra a pasta <strong>"9. VPN"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/2.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Localizar a pasta da VPN Restrita</h3>
+        <p>Dentro da pasta VPN, localize a pasta chamada <strong>"SYS-VPN1-Restrita"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/3.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Copiar a pasta</h3>
+        <p>Selecione a pasta <strong>"SYS-VPN1-Restrita"</strong> e clique em <strong>"Copiar"</strong> (Ctrl+C).</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/4.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Colar na pasta de configuração do OpenVPN</h3>
+        <p>Navegue até o diretório de configuração do OpenVPN do usuário e cole a pasta:</p>
+        <div class="code-block">C:\Users\[USUARIO]\OpenVPN\config</div>
+        <p>Substitua <strong>[USUARIO]</strong> pelo nome de usuário da máquina.</p>
+        <div class="callout callout-note">
+          <span class="callout-icon">📌</span>
+          <span><strong>EXEMPLO:</strong> Neste tutorial, o caminho utilizado foi <strong>C:\Users\FelippePacomio\OpenVPN\config</strong>.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/5.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 6 -->
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        <h3>Conectar pela OpenVPN GUI</h3>
+        <p>Feche o Explorador de Arquivos. Na <strong>bandeja do sistema</strong> (próximo ao relógio), clique na setinha para exibir os ícones ocultos. Localize o ícone da <strong>OpenVPN GUI</strong>, clique com o botão direito sobre ele e selecione <strong>"Conectar"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/6.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/7.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 7 -->
+    <div class="step">
+      <div class="step-number">7</div>
+      <div class="step-content">
+        <h3>Inserir as credenciais do Active Directory</h3>
+        <p>Uma janela será exibida solicitando as informações de login. Peça ao usuário para inserir seu <strong>login e senha do Active Directory</strong> e clique em <strong>"OK"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/8.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 8 -->
+    <div class="step">
+      <div class="step-number">8</div>
+      <div class="step-content">
+        <h3>Verificar a conexão</h3>
+        <p>Se a conexão for bem-sucedida, o ícone da OpenVPN GUI ficará com <strong>fundo verde</strong>, conforme a imagem.</p>
+        <div class="callout callout-tip">
+          <span class="callout-icon">💡</span>
+          <span><strong>DICA:</strong> Caso a conexão venha a falhar, verifique se o usuário está cadastrado no Active Directory e se faz parte do grupo <strong>vpn_restrita</strong>. Se não estiver, siga os passos abaixo.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/9.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 2: CADASTRO NO ACTIVE DIRECTORY ========== -->
+
+    <!-- STEP 9 -->
+    <div class="step">
+      <div class="step-number">9</div>
+      <div class="step-content">
+        <h3>Acessar o LAB-CORP via TeamViewer</h3>
+        <p>Abra o <strong>TeamViewer</strong> no seu computador.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/10.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 10 -->
+    <div class="step">
+      <div class="step-number">10</div>
+      <div class="step-content">
+        <h3>Conectar à máquina LAB-CORP</h3>
+        <p>Na lista de máquinas, localize <strong>LAB-CORP</strong> e clique em <strong>"Conectar"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/11.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 11 -->
+    <div class="step">
+      <div class="step-number">11</div>
+      <div class="step-content">
+        <h3>Fazer login no Active Directory</h3>
+        <p>Dentro do LAB-CORP, realize o login com sua <strong>conta admin do AD</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/12.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 12 -->
+    <div class="step">
+      <div class="step-number">12</div>
+      <div class="step-content">
+        <h3>Abrir o gerenciamento de usuários do AD</h3>
+        <p>Pressione <strong>Windows + R</strong> para abrir o Executar e acesse o seguinte caminho:</p>
+        <div class="code-block">%SystemRoot%\system32\dsa.msc</div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/13.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 13 -->
+    <div class="step">
+      <div class="step-number">13</div>
+      <div class="step-content">
+        <h3>Navegar até a pasta de usuários</h3>
+        <p>No painel do Active Directory, navegue pela estrutura: <strong>sysevolution.com.br → SysEvolution → Usuarios → Pessoas</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/14.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 14 -->
+    <div class="step">
+      <div class="step-number">14</div>
+      <div class="step-content">
+        <h3>Criar um novo usuário</h3>
+        <p>Clique no ícone indicado na imagem para <strong>criar um novo usuário</strong> dentro da pasta Pessoas.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/15.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 15 -->
+    <div class="step">
+      <div class="step-number">15</div>
+      <div class="step-content">
+        <h3>Preencher as informações do usuário</h3>
+        <p>Insira as informações do usuário conforme sua <strong>conta Microsoft</strong> (mesmo nome, sobrenome e padrão de login). Clique em <strong>"Avançar"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/16.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 16 -->
+    <div class="step">
+      <div class="step-number">16</div>
+      <div class="step-content">
+        <h3>Definir a senha</h3>
+        <p>Insira uma <strong>senha</strong> para o usuário. <strong>Desmarque</strong> a opção <em>"O usuário deve alterar a senha no próximo logon"</em> e clique em <strong>"Avançar"</strong>.</p>
+        <div class="callout callout-important">
+          <span class="callout-icon">⚠️</span>
+          <span><strong>IMPORTANTE:</strong> É fundamental desmarcar a opção de alteração de senha no próximo logon, caso contrário o usuário não conseguirá se conectar à VPN.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/17.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 17 -->
+    <div class="step">
+      <div class="step-number">17</div>
+      <div class="step-content">
+        <h3>Finalizar a criação da conta</h3>
+        <p>Clique em <strong>"Concluir"</strong> para finalizar o cadastro do usuário no Active Directory.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/18.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- ========== PARTE 3: ADICIONAR AO GRUPO VPN_RESTRITA ========== -->
+
+    <!-- STEP 18 -->
+    <div class="step">
+      <div class="step-number">18</div>
+      <div class="step-content">
+        <h3>Localizar o usuário criado</h3>
+        <p>Com a conta criada, localize o <strong>usuário</strong> dentro da pasta <strong>Pessoas</strong>.</p>
+        <div class="callout callout-tip">
+          <span class="callout-icon">💡</span>
+          <span><strong>DICA:</strong> Caso o usuário <strong>já exista</strong> no AD e você precisa apenas adicioná-lo ao grupo da VPN Restrita, comece a partir deste passo.</span>
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/19.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 19 -->
+    <div class="step">
+      <div class="step-number">19</div>
+      <div class="step-content">
+        <h3>Abrir as propriedades do usuário</h3>
+        <p>Clique com o botão direito sobre o usuário e selecione <strong>"Propriedades"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/20.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 20 -->
+    <div class="step">
+      <div class="step-number">20</div>
+      <div class="step-content">
+        <h3>Acessar a aba "Membro de"</h3>
+        <p>Na janela de propriedades, navegue até a aba <strong>"Membro de"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/21.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/22.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 21 -->
+    <div class="step">
+      <div class="step-number">21</div>
+      <div class="step-content">
+        <h3>Adicionar ao grupo</h3>
+        <p>Clique em <strong>"Adicionar..."</strong>. Na janela que será exibida, digite <strong>"vpn"</strong> e clique em <strong>"Verificar nomes"</strong>.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/23.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/24.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/25.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 22 -->
+    <div class="step">
+      <div class="step-number">22</div>
+      <div class="step-content">
+        <h3>Selecionar o grupo vpn_restrita</h3>
+        <p>O grupo <strong>vpn_restrita</strong> será exibido. Clique em <strong>"OK"</strong> para selecioná-lo.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/26.png">
+        </div>
+      </div>
+    </div>
+    <div class="step-divider"></div>
+
+    <!-- STEP 23 -->
+    <div class="step" style="border-radius: 12px 12px 0 0;">
+      <div class="step-number">23</div>
+      <div class="step-content">
+        <h3>Aplicar e confirmar</h3>
+        <p>De volta à janela de propriedades, clique em <strong>"Aplicar"</strong> e em seguida <strong>"OK"</strong> para salvar as alterações. Repita os passos 1 à 8 para conectar o usuário na VPN.</p>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/27.png">
+        </div>
+        <div class="img-placeholder">
+          <img src="./vpn-restrita-images/28.png">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DONE -->
+  <div class="done-section">
+    <div class="done-icon">✅</div>
+    <h2>Pronto!</h2>
+    <p>O usuário foi cadastrado no Active Directory e adicionado ao grupo <strong>vpn_restrita</strong>. Agora ele pode se conectar à VPN Restrita utilizando suas credenciais do AD.</p>
+  </div>
+
+  <!-- OBSERVATIONS -->
+  <div class="obs-section">
+    <div class="obs-box">
+      <h4>📋 Observações</h4>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>O usuário <strong>só conseguirá</strong> utilizar a VPN Restrita se for membro do grupo <strong>vpn_restrita</strong> no Active Directory.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>A <strong>OpenVPN GUI</strong> deve estar instalada na máquina do usuário para que a VPN Restrita funcione.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Caso o usuário <strong>já exista</strong> no AD e precise apenas de acesso à VPN Restrita, basta seguir a partir do <strong>Passo 18</strong> (adicionar ao grupo).</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>Lembre-se de <strong>desmarcar</strong> a opção "O usuário deve alterar a senha no próximo logon" ao criar a conta no AD, para evitar problemas na autenticação da VPN.</span>
+      </div>
+      <div class="obs-item">
+        <span class="obs-bullet">→</span>
+        <span>O acesso ao <strong>LAB-CORP</strong> via TeamViewer é necessário apenas para o cadastro no AD. A configuração da VPN na máquina do usuário é feita localmente.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-box">
+      <p>Em caso de dúvidas ou problemas durante o processo, entre em contato<br>com a equipe de <strong>Service Desk</strong> nos canais:</p>
+
+      <div class="cta-channels">
+        <div class="cta-channel">
+          <div class="cta-channel-icon"><img src="./images/invgate.png"></div>
+          <a href="https://sysevolution.sd.cloud.invgate.net/" target="_blank">sysevolution.sd.cloud.invgate.net</a>
+        </div>
+        <div class="cta-channel">
+          <div class="cta-channel-icon"><img src="./images/outlook.png"></div>
+          <span>servicedesk@sysevolution.com.br</span>
+        </div>
+        <div class="cta-channel">
+          <div class="cta-channel-icon"><img src="./images/whatsapp.png"></div>
+          <span>(11) 4633-8777</span>
+        </div>
+      </div>
+
+      <p class="cta-teams-note">Também estamos disponíveis no <strong>Microsoft Teams</strong>.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="img-placeholder">
+      <img src="./images/Logo-SysEvolution-Horizontal.jpg">
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
